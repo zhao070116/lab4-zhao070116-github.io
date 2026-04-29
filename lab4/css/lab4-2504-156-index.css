@@ -1,0 +1,516 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
+    background-color: #f5f7fb;
+    padding-top: 70px;
+    color: #1e2a3e;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #2c3e50;
+    transition: 0.25s;
+}
+
+a:hover {
+    color: #e74c3c;
+}
+
+/* ========= 顶部导航栏 + 图标动画 ========= */
+.top-bar {
+    width: 100%;
+    height: 70px;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+}
+
+.top-bar h1 {
+    float: left;
+    font-size: 24px;
+    line-height: 70px;
+    margin-left: 40px;
+    color: #e74c3c;
+    letter-spacing: 1px;
+}
+
+.top-nav {
+    float: right;
+    line-height: 70px;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-nav a {
+    font-size: 15px;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.top-nav a:hover {
+    color: #e74c3c;
+}
+
+/* 购物车 & 搜索图标 —— 悬停旋转动画 */
+.nav-icon {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+    color: #5d6e85;
+}
+
+.nav-icon:hover {
+    transform: rotate(18deg) scale(1.12);
+    color: #e74c3c;
+}
+
+.login-link {
+    margin-left: 15px !important;
+    background: #e74c3c10;
+    padding: 6px 14px;
+    border-radius: 30px;
+    transition: all 0.25s;
+}
+
+.login-link:hover {
+    background: #e74c3c;
+    color: white !important;
+}
+
+/* ========= 轮播图区域（独立，不受侧边栏影响） ========= */
+.carousel-section {
+    max-width: 1300px;
+    width: calc(100% - 60px);
+    margin: 20px auto 30px auto;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.carousel-wrapper {
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    flex-direction: column;
+    animation: verticalUpCarousel 12s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.carousel-slide {
+    width: 100%;
+    height: 380px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    color: white;
+    padding: 8px 24px;
+    border-radius: 40px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+@keyframes verticalUpCarousel {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(0); }
+    30% { transform: translateY(-380px); }
+    55% { transform: translateY(-380px); }
+    60% { transform: translateY(-760px); }
+    85% { transform: translateY(-760px); }
+    90% { transform: translateY(-1140px); }
+    100% { transform: translateY(-1140px); }
+}
+
+/* ========= 主内容：Flex 布局，彻底避免重叠 ========= */
+.main-content {
+    max-width: 1400px;
+    width: calc(100% - 60px);
+    margin: 30px auto 50px;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+/* 左侧分类 */
+.left-sidebar {
+    flex: 0 0 240px;
+    background: #ffffff;
+    padding: 28px 20px;
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    align-self: stretch;
+}
+
+.left-sidebar h2 {
+    color: #e74c3c;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #fee2e2;
+}
+
+.left-sidebar li {
+    margin-bottom: 16px;
+}
+
+.left-sidebar a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-weight: 500;
+}
+
+.left-sidebar a:hover {
+    background: #fff0ee;
+    color: #e74c3c;
+    padding-left: 20px;
+}
+
+/* 中间内容 (弹性占满剩余空间) */
+.center-content {
+    flex: 1;
+    min-width: 260px;
+}
+
+/* 热门图书推荐 */
+.hot-recommend {
+    background: #ffffff;
+    padding: 28px 24px;
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    margin-bottom: 28px;
+}
+
+.hot-recommend h2 {
+    font-size: 22px;
+    margin-bottom: 24px;
+    color: #1e2a3e;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.books-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+.book-card {
+    width: 180px;
+    padding: 18px 12px;
+    background: #fefefe;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    position: relative;
+}
+
+.book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12);
+}
+
+/* 图片悬停动效：右移 + 放大 + 阴影 */
+.book-img {
+    width: 140px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 14px;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.05);
+}
+
+.book-card:hover .book-img {
+    transform: translateX(8px) scale(1.06);
+    box-shadow: 0 20px 28px -8px rgba(0, 0, 0, 0.25);
+}
+
+.price {
+    color: #e74c3c;
+    font-weight: 700;
+    margin-top: 8px;
+    font-size: 16px;
+}
+
+.hot-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ff6b4a;
+    color: white;
+    padding: 4px 10px;
+    font-size: 11px;
+    border-radius: 30px;
+    font-weight: bold;
+    display: none;
+}
+
+.book-card:hover .hot-tag {
+    display: block;
+}
+
+/* 新书表格 */
+.new-book {
+    background: #ffffff;
+    padding: 28px 24px;
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+}
+
+.new-book h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.new-book table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.new-book th, .new-book td {
+    padding: 14px 8px;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.new-book th {
+    background: #f8fafc;
+    color: #2c3e50;
+    font-weight: 600;
+    border-radius: 16px 16px 0 0;
+}
+
+.new-book tr:hover td {
+    background-color: #fef9f7;
+}
+
+/* ========= 右侧边栏 - Sticky 布局，优雅跟随 ========= */
+.right-sidebar {
+    flex: 0 0 280px;
+    background: #ffffff;
+    padding: 28px 22px;
+    border-radius: 28px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    align-self: flex-start;
+    position: sticky;
+    top: 90px;
+    transition: all 0.2s;
+    border: 1px solid #f0f2f5;
+}
+
+.right-sidebar h3 {
+    font-size: 20px;
+    color: #e74c3c;
+    margin-top: 28px;
+    margin-bottom: 16px;
+    border-left: 5px solid #e74c3c;
+    padding-left: 16px;
+}
+
+.right-sidebar h3:first-child {
+    margin-top: 0;
+}
+
+.right-sidebar p {
+    font-size: 15px;
+    color: #2c3e50;
+    line-height: 1.55;
+    margin-bottom: 12px;
+    background: #f9fbfd;
+    padding: 10px 14px;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.right-sidebar p:hover {
+    background: #fff2ef;
+    transform: translateX(3px);
+}
+
+/* ========= 登录弹窗 (保持原有功能) ========= */
+.login-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    width: 440px;
+    padding: 32px;
+    border-radius: 32px;
+    box-shadow: 0 30px 40px rgba(0, 0, 0, 0.2);
+}
+
+.login-form, .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-form h2, .register-form h2 {
+    text-align: center;
+    color: #e74c3c;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group input {
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 3px #e74c3c20;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    padding: 12px;
+    border: none;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.login-btn, .register-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.login-btn:hover, .register-btn:hover {
+    background: linear-gradient(135deg, #ff6b5c, #e74c3c);
+    transform: scale(1.02);
+    box-shadow: 0 8px 18px rgba(231, 76, 60, 0.3);
+}
+
+.switch-btn {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+.switch-btn:hover {
+    background: #e2e8f0;
+    transform: scale(0.98);
+}
+
+/* ========= 响应式：移动端 & 平板适配 ========= */
+@media screen and (max-width: 1100px) {
+    .main-content {
+        flex-direction: column;
+    }
+    .right-sidebar {
+        position: static;
+        width: 100%;
+        flex: auto;
+        margin-top: 10px;
+    }
+    .left-sidebar {
+        flex: auto;
+        width: 100%;
+    }
+    .carousel-section {
+        width: calc(100% - 40px);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .top-bar h1 {
+        font-size: 18px;
+        margin-left: 20px;
+    }
+    .top-nav a, .nav-icon {
+        margin-left: 10px;
+    }
+    .top-nav {
+        margin-right: 20px;
+    }
+    .books-wrap {
+        gap: 16px;
+    }
+    .book-card {
+        width: 150px;
+    }
+    .book-img {
+        width: 120px;
+        height: 170px;
+    }
+    .carousel-wrapper {
+        height: 240px;
+    }
+    .carousel-slide {
+        height: 240px;
+    }
+    @keyframes verticalUpCarousel {
+        0% { transform: translateY(0); }
+        25% { transform: translateY(0); }
+        30% { transform: translateY(-240px); }
+        55% { transform: translateY(-240px); }
+        60% { transform: translateY(-480px); }
+        85% { transform: translateY(-480px); }
+        90% { transform: translateY(-720px); }
+        100% { transform: translateY(-720px); }
+    }
+}

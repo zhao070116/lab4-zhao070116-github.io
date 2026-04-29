@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图书数字展销平台 | 动态轮播·交互动效</title>
+    <link rel="stylesheet" href="css/lab4-2504-156-index.css">
+</head>
+<body>
+
+<!-- 登录/注册弹窗容器 -->
+<div class="login-modal" id="loginModal">
+    <div class="modal-content">
+        <!-- 登录表单 -->
+        <div class="login-form" id="loginForm">
+            <h2>用户登录</h2>
+            <div class="input-group">
+                <label>用户名：</label>
+                <input type="text" id="loginUsername" placeholder="请输入用户名">
+            </div>
+            <div class="input-group">
+                <label>密码：</label>
+                <input type="password" id="loginPassword" placeholder="请输入密码">
+            </div>
+            <div class="btn-group">
+                <button class="btn login-btn" id="loginBtn" onclick="handleLogin()">登录</button>
+                <button class="btn switch-btn" onclick="showRegister()">没有账号？去注册</button>
+            </div>
+        </div>
+
+        <!-- 注册表单（默认隐藏） -->
+        <div class="register-form" id="registerForm" style="display: none;">
+            <h2>用户注册</h2>
+            <div class="input-group">
+                <label>用户名：</label>
+                <input type="text" id="regUsername" placeholder="请输入用户名">
+            </div>
+            <div class="input-group">
+                <label>密码：</label>
+                <input type="password" id="regPassword" placeholder="请输入密码">
+            </div>
+            <div class="input-group">
+                <label>确认密码：</label>
+                <input type="password" id="regPassword2" placeholder="请再次输入密码">
+            </div>
+            <div class="btn-group">
+                <button class="btn register-btn" onclick="handleRegister()">注册</button>
+                <button class="btn switch-btn" onclick="showLogin()">已有账号？去登录</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 顶部导航栏（整合登录入口 + 图标动画） -->
+<div class="top-bar">
+    <h1>📚 图书数字展销平台</h1>
+    <nav class="top-nav">
+        <a href="#">首页</a>
+        <a href="#">图书分类</a>
+        <a href="#">热门推荐</a>
+        <a href="#">新书上市</a>
+        <a href="#">促销活动</a>
+        <!-- 购物车图标 + 搜索图标 (悬停旋转动画) -->
+        <span class="nav-icon icon-cart" title="购物车">🛒</span>
+        <span class="nav-icon icon-search" title="搜索">🔍</span>
+        <!-- 登录/注册入口 -->
+        <a href="#" class="login-link" onclick="showModal()">登录/注册</a>
+    </nav>
+</div>
+
+<!-- 轮播图区域（纯CSS动画：从下向上切换轮播） -->
+<!-- 轮播图区域（使用 img/1.png, 2.png, 3.png） -->
+<div class="carousel-section">
+    <div class="carousel-wrapper">
+        <div class="carousel-track">
+            <div class="carousel-slide">
+                <img src="img/1.png" alt="轮播图书1">
+                <div class="slide-caption">热销图书《轮播1》</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="img/2.png" alt="轮播图书2">
+                <div class="slide-caption">经典必读《轮播2》</div>
+            </div>
+            <div class="carousel-slide">
+                <img src="img/3.png" alt="轮播图书3">
+                <div class="slide-caption">新书推荐《轮播3》</div>
+            </div>
+            <!-- 克隆第一张用于无缝向上轮播 -->
+            <div class="carousel-slide clone-slide">
+                <img src="img/1.png" alt="轮播图书1克隆">
+                <div class="slide-caption">热销图书《轮播1》</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="main-content">
+        <!-- 左侧分类导航 -->
+        <aside class="left-sidebar">
+            <h2>图书分类导航</h2>
+            <ul>
+                <li><a href="#">小说</a></li>
+                <li><a href="#">传记</a></li>
+                <li><a href="#">科幻</a></li>
+                <li><a href="#">历史</a></li>
+                <li><a href="#">科普</a></li>
+            </ul>
+        </aside>
+
+        <!-- 中部核心内容 -->
+        <main class="center-content">
+            <!-- 热门图书推荐 (图片悬停动效: 右移+阴影加深+放大) -->
+            <section class="hot-recommend">
+                <h2>🔥 热门图书推荐</h2>
+                <div class="books-wrap">
+                    <div class="book-card">
+                        <img src="img/book1.png" alt="网页设计" class="book-img">
+                        <p>《网页设计》</p>
+                        <p class="price">价格:¥79.9</p>
+                        <span class="hot-tag">热销中</span>
+                    </div>
+                    <div class="book-card">
+                        <img src="img/book2.png" alt="高等数学" class="book-img">
+                        <p>《高等数学》</p>
+                        <p class="price">价格:¥39.9</p>
+                    </div>
+                    <div class="book-card">
+                        <img src="img/book3.png" alt="离散数学" class="book-img">
+                        <p>《离散数学》</p>
+                        <p class="price">价格:¥39.9</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 新书上市表格 -->
+            <section class="new-book">
+                <h2>📖 新书上市</h2>
+                <table>
+                    <thead>
+                        <tr><th>图书名称</th><th>作者</th><th>价格</th><th>上架时间</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>《红岩》</td><td>罗广斌</td><td>¥45.0</td><td>2026-4-15</td></tr>
+                        <tr><td>《程序设计基础》</td><td>谭浩强</td><td>¥52.0</td><td>2026-4-1/t5<d></tr>
+                        <tr><td>《狂人日记》</td><td>鲁迅</td><td>¥49.0</td><td>2026-4-15</td></tr>
+                        <tr><td>《小王子》</td><td>安托万·德·圣埃克苏佩里</td><td>¥54.0</td><td>2026-4-15</td></tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <!-- 右侧栏促销 + 联系 -->
+        <aside class="right-sidebar">
+            <h3>🎁 促销活动</h3>
+            <p>全场图书满100减20!</p>
+            <p>新书上市,享受额外8折优惠!</p>
+            <p>活动时间:2026-04-01至2026-05-01</p>
+
+            <h3>📞 联系我们</h3>
+            <p>电话:400-123-4567</p>
+            <p>邮箱:book@example.com</p>
+        </aside>
+    </div>
+</div>
+
+<script>
+    // 1. 显示/隐藏弹窗
+    function showModal() {
+        document.getElementById('loginModal').style.display = 'flex';
+    }
+    function hideModal() {
+        document.getElementById('loginModal').style.display = 'none';
+    }
+    // 2. 切换登录/注册表单
+    function showRegister() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+    }
+    function showLogin() {
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+    }
+    // 3. 注册功能：把用户信息存到localStorage
+    function handleRegister() {
+        const username = document.getElementById('regUsername').value.trim();
+        const password = document.getElementById('regPassword').value;
+        const password2 = document.getElementById('regPassword2').value;
+        if (!username || !password || !password2) {
+            alert('请填写完整信息！');
+            return;
+        }
+        if (password !== password2) {
+            alert('两次密码不一致！');
+            return;
+        }
+        let users = JSON.parse(localStorage.getItem('bookshopUsers')) || [];
+        const existUser = users.find(u => u.username === username);
+        if (existUser) {
+            alert('用户名已存在！');
+            return;
+        }
+        users.push({ username, password });
+        localStorage.setItem('bookshopUsers', JSON.stringify(users));
+        alert('注册成功！请登录');
+        showLogin();
+        document.getElementById('regUsername').value = '';
+        document.getElementById('regPassword').value = '';
+        document.getElementById('regPassword2').value = '';
+    }
+    // 4. 登录功能
+    function handleLogin() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        if (!username || !password) {
+            alert('请输入用户名和密码！');
+            return;
+        }
+        const users = JSON.parse(localStorage.getItem('bookshopUsers')) || [];
+        const user = users.find(u => u.username === username && u.password === password);
+        if (user) {
+            alert('登录成功！欢迎访问图书平台');
+            hideModal();
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+        } else {
+            alert('用户名或密码错误！');
+        }
+    }
+    // 点击遮罩层关闭弹窗
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+        if (e.target === this) hideModal();
+    });
+</script>
+</body>
+</html>
